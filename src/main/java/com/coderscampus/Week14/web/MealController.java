@@ -20,15 +20,15 @@ public class MealController {
 	@Value("${spoonacular.urls.baseurl}")
 	private String baseURL;
 	
-	@Value("${spoonacular.urls.mealplan}")
-	private String mealPlan;
+	@Value("${apikey}")
+	private String apiKey;
 	
 	@GetMapping("/mealplanner/day")
 	//Well use a ResponseEntity extension as the return value
 	public ResponseEntity<DayResponse> getDayMeals(Optional<String> targetCalories, Optional<String> diet, Optional<String> exclusions) {
 		RestTemplate rt = new RestTemplate();
 		
-		URI uri = UriComponentsBuilder.fromHttpUrl(mealPlan)
+		URI uri = UriComponentsBuilder.fromHttpUrl(apiKey)
 									  .queryParam("timeframe", "day")
 									  .queryParam("targetCalories", targetCalories)
 									  .queryParam("diet", diet)
@@ -45,7 +45,7 @@ public class MealController {
 	@GetMapping("/mealplanner/week")
 	public ResponseEntity<WeekReponse> getWeekMeals(Optional<String> targetCalories, Optional<String> diet, Optional<String> exclusions) {
 		RestTemplate rt = new RestTemplate();
-		URI uri = UriComponentsBuilder.fromHttpUrl(mealPlan)
+		URI uri = UriComponentsBuilder.fromHttpUrl(apiKey)
 									  .queryParam("timeframe", "week")
 									  .queryParam("targetCalories", targetCalories)
 									  .queryParam("diet", diet)
